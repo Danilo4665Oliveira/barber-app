@@ -72,13 +72,15 @@ const Home = async () => {
           </CardContent>
         </Card>
 
-        {/*Barbearias*/}
+        {/*Recomendados*/}
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
           Recomendados
         </h2>
-        {barbershops.map((barbershop) => (
-          <BarbershopItem barbershop={barbershop} key={barbershop.id} />
-        ))}
+        <div className="flex gap-4 overflow-auto">
+          {barbershops.map((barbershop) => (
+            <BarbershopItem barbershop={barbershop} key={barbershop.id} />
+          ))}
+        </div>
       </div>
     </div>
   )
