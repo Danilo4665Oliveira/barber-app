@@ -4,19 +4,24 @@ import { Button } from "./ui/button"
 import { SearchIcon } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { db } from "./_lib/prisma"
 import BarbershopItem from "@/components/barbershop-item"
+import { quickSearchOptions } from "./_constants/search"
+import BookingItem from "@/components/booking-item"
+
+//TODO Receber agendamento como prop
 
 const Home = async () => {
-  console.log("TESTE: O código chegou aqui!")
-  console.log("DB INSTANCE:", db)
-
   if (!db) {
     return <div>Erro: O Banco de Dados não foi instanciado corretamente.</div>
   }
   const barbershops = await db.barbershop.findMany({})
+  const popularBarbershops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  })
+
   return (
     <div>
       {/*Header*/}
@@ -34,6 +39,21 @@ const Home = async () => {
           </Button>
         </div>
 
+        {/*Busca rápida Está na _constants/search.ts*/}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          {quickSearchOptions.map((option) => (
+            <Button className="gap-2" variant="secondary" key={option.title}>
+              <Image
+                src={option.imageUrl}
+                alt={option.title}
+                width={16}
+                height={16}
+              />
+              {option.title}
+            </Button>
+          ))}
+        </div>
+
         {/*Banner*/}
         <div className="relative mt-6 h-[150px] w-full">
           <Image
@@ -44,33 +64,8 @@ const Home = async () => {
           />
         </div>
 
-        {/*Agendamento*/}
-        <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
-          Agendamentos
-        </h2>
-
-        <Card>
-          <CardContent className="flex justify-between p-0">
-            {/*Esquerda*/}
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <Badge className="w-fit">Confirmado</Badge>
-              <h3 className="font-semibold">Corte de cabelo</h3>
-
-              <div className="flex items-center">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png" />
-                </Avatar>
-                <p className="text-sm">Corte & Estilo</p>
-              </div>
-            </div>
-            {/*Direita*/}
-            <div className="flex flex-col items-center justify-center border-l-2 border-solid px-5">
-              <p className="text-sm">Fevereiro</p>
-              <p className="text-2xl">05</p>
-              <p className="text-sm">17:30</p>
-            </div>
-          </CardContent>
-        </Card>
+        {/*Agendamento componentizado no booking-item.tsx*/}
+        <BookingItem />
 
         {/*Recomendados*/}
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
@@ -81,7 +76,26 @@ const Home = async () => {
             <BarbershopItem barbershop={barbershop} key={barbershop.id} />
           ))}
         </div>
+
+        {/*Populares*/}
+        <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto">
+          {popularBarbershops.map((barbershop) => (
+            <BarbershopItem barbershop={barbershop} key={barbershop.id} />
+          ))}
+        </div>
       </div>
+      <footer>
+        <Card>
+          <CardContent className="px-5 py-6">
+            <p className="text-sm text-gray-400">
+              © 2026 Copyright <span className="font-bold">DanDev</span>
+            </p>
+          </CardContent>
+        </Card>
+      </footer>
     </div>
   )
 }
