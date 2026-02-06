@@ -39,7 +39,7 @@ const Home = async () => {
           </Button>
         </div>
 
-        {/*Busca rápida Está na _constants/search.ts*/}
+        {/*Busca rápida Está na _constants/search.ts (Diminuindo quantidade de linhas)*/}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
             <Button className="gap-2" variant="secondary" key={option.title}>
@@ -64,14 +64,14 @@ const Home = async () => {
           />
         </div>
 
-        {/*Agendamento componentizado no booking-item.tsx*/}
+        {/*Agendamento componentizado no booking-item.tsx (Diminuindo a quantidade de linhas)*/}
         <BookingItem />
 
         {/*Recomendados*/}
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
           Recomendados
         </h2>
-        <div className="flex gap-4 overflow-auto">
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((barbershop) => (
             <BarbershopItem barbershop={barbershop} key={barbershop.id} />
           ))}
@@ -81,12 +81,13 @@ const Home = async () => {
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
           Populares
         </h2>
-        <div className="flex gap-4 overflow-auto">
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
           {popularBarbershops.map((barbershop) => (
             <BarbershopItem barbershop={barbershop} key={barbershop.id} />
           ))}
         </div>
       </div>
+
       <footer>
         <Card>
           <CardContent className="px-5 py-6">
