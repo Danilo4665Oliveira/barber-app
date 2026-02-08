@@ -9,10 +9,12 @@ declare global {
 
 let prisma: PrismaClient
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 10, // Limitar conexões no Neon para não dar erro
+})
 const adapter = new PrismaPg(pool)
 
-// 2. Aplicamos o Singleton para não estourar as conexões no Next.js
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient({ adapter })
 } else {
