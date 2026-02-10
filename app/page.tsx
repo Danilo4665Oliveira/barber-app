@@ -1,12 +1,11 @@
 import Header from "@/components/header"
-import { Input } from "@/components/ui/input"
 import { Button } from "./ui/button"
-import { SearchIcon } from "lucide-react"
 import Image from "next/image"
 import { db } from "./_lib/prisma"
 import BarbershopItem from "@/components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "@/components/booking-item"
+import Search from "@/components/search"
 
 //TODO Receber agendamento como prop
 
@@ -28,14 +27,11 @@ const Home = async () => {
       <div className="p-5">
         {/*Texto*/}
         <h2 className="text-xl font-bold">Olá, Danilo!</h2>
-        <p className="text-md text-gray-600">Terça, 4 de Fevereiro.</p>
+        <p className="text-md text-gray-600">Segunda-Feira, 9 de Fevereiro.</p>
 
-        {/*Barra de busca*/}
-        <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Buscar serviços" />
-          <Button>
-            <SearchIcon />
-          </Button>
+        {/*Barra de busca (Melhor colocar o espaçamento aqui pra não ter que olhar o componente pra poder mudar)*/}
+        <div className="mt-6">
+          <Search />
         </div>
 
         {/*Busca rápida Está na _constants/search.ts (Diminuindo quantidade de linhas)*/}
