@@ -7,19 +7,40 @@ import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "@/components/booking-item"
 import Search from "@/components/search"
 import Link from "next/link"
-
-//TODO Receber agendamento como prop
+import { authOptions } from "./_lib/auth"
+import { getServerSession } from "next-auth"
 
 const Home = async () => {
   if (!db) {
     return <div>Erro: O Banco de Dados não foi instanciado corretamente.</div>
   }
+  const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({})
   const popularBarbershops = await db.barbershop.findMany({
     orderBy: {
       name: "desc",
     },
   })
+  const confirmedBookings = session?.user
+    ? await db.booking.findMany({
+        where: {
+          userId: session ? (session.user as { id: string }).id : undefined,
+          date: {
+            gte: new Date(),
+          },
+        },
+        include: {
+          service: {
+            include: {
+              barbershop: true,
+            },
+          },
+        },
+        orderBy: {
+          date: "asc",
+        },
+      })
+    : []
 
   return (
     <div>
@@ -67,8 +88,17 @@ const Home = async () => {
           />
         </div>
 
+        {/* AGENDAMENTO */}
+        <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
+          Agendamentos
+        </h2>
+
         {/*Agendamento componentizado no booking-item.tsx (Diminuindo a quantidade de linhas)*/}
-        <BookingItem />
+        <div className="mt-6 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          {confirmedBookings.map((booking) => (
+            <BookingItem booking={booking} key={booking.id} />
+          ))}
+        </div>
 
         {/*Recomendados*/}
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
