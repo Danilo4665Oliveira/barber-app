@@ -15,7 +15,7 @@ const SidebarSheet = () => {
   const { data } = useSession()
 
   const handleLogoutClick = async () => {
-    await signOut()
+    await signOut({ callbackUrl: "/" })
   }
 
   console.log(data?.user)
