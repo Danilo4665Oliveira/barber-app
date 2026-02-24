@@ -9,11 +9,10 @@ import Search from "@/components/search"
 import Link from "next/link"
 import { authOptions } from "./_lib/auth"
 import { getServerSession } from "next-auth"
+import { ptBR } from "date-fns/locale"
+import { format } from "date-fns"
 
 const Home = async () => {
-  if (!db) {
-    return <div>Erro: O Banco de Dados não foi instanciado corretamente.</div>
-  }
   const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({})
   const popularBarbershops = await db.barbershop.findMany({
@@ -48,8 +47,18 @@ const Home = async () => {
       <Header />
       <div className="p-5">
         {/*Texto*/}
-        <h2 className="text-xl font-bold">Olá, Danilo!</h2>
-        <p className="text-md text-gray-600">Segunda-Feira, 9 de Fevereiro.</p>
+        <h2 className="text-xl font-bold">
+          Olá, {session?.user ? session.user.name : "Bem vindo"} !
+        </h2>
+        <p>
+          <span className="capitalize">
+            {format(new Date(), "EEEE, dd", { locale: ptBR })}
+          </span>
+          <span>&nbsp;de&nbsp;</span>
+          <span className="capitalize">
+            {format(new Date(), "MMMM", { locale: ptBR })}
+          </span>
+        </p>
 
         {/*Barra de busca (Melhor colocar o espaçamento aqui pra não ter que olhar o componente pra poder mudar)*/}
         <div className="mt-6">
