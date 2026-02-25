@@ -97,17 +97,22 @@ const Home = async () => {
           />
         </div>
 
-        {/* AGENDAMENTO */}
-        <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
-          Agendamentos
-        </h2>
+        {confirmedBookings.length > 0 && (
+          <>
+            {/* AGENDAMENTO */}
+            <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
+              Agendamentos
+            </h2>
+
+            <div className="mt-6 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+              {confirmedBookings.map((booking) => (
+                <BookingItem booking={booking} key={booking.id} />
+              ))}
+            </div>
+          </>
+        )}
 
         {/*Agendamento componentizado no booking-item.tsx (Diminuindo a quantidade de linhas)*/}
-        <div className="mt-6 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {confirmedBookings.map((booking) => (
-            <BookingItem booking={booking} key={booking.id} />
-          ))}
-        </div>
 
         {/*Recomendados*/}
         <h2 className="mb-3 mt-6 font-bold uppercase text-gray-400">
