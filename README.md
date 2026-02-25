@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+💈 BarberApp - Sistema de Agendamento Online
+Este é um projeto de SaaS (Software as a Service) focado no gerenciamento de barbearias, desenvolvido como parte da graduação em Análise e Desenvolvimento de Sistemas na UNINASSAU. O sistema permite que clientes realizem agendamentos em tempo real e oferece uma interface administrativa para o proprietário gerenciar o faturamento e horários.
 
-## Getting Started
+👤 Autor
+Nome: Danilo Oliveira
 
-First, run the development server:
+Curso: Análise e Desenvolvimento de Sistemas (4º Período)
 
-```bash
+Instituição: UNINASSAU
+
+🚀 Tecnologias Utilizadas
+O projeto utiliza a stack mais moderna do ecossistema JavaScript:
+
+Framework: Next.js 14+ (App Router)
+
+Linguagem: TypeScript (Tipagem estática para maior segurança)
+
+ORM: Prisma (Modelagem e manipulação de dados)
+
+Banco de Dados: PostgreSQL hospedado no NeonDB
+
+Autenticação: NextAuth.js com Google Login
+
+Estilização: Tailwind CSS e Shadcn/ui
+
+Deploy: Vercel
+
+🛠️ Funcionalidades e Conceitos Aplicados (CRUD)
+O sistema demonstra o domínio das operações fundamentais de software (CRUD):
+
+Create: Registro de novos agendamentos via formulário interativo com validação de horários.
+
+Read: Listagem dinâmica de barbearias, serviços e agendamentos confirmados consumindo dados do PostgreSQL via Prisma.
+
+Update: Gerenciamento de estado para seleção de datas e horários disponíveis.
+
+Delete: Cancelamento de reservas com remoção lógica do registro no banco de dados.
+
+⚙️ Como rodar o projeto localmente
+Clone o repositório:
+
+Bash
+git clone https://github.com/Danilo4665Oliveira/barber-app.git
+Instale as dependências:
+
+Bash
+npm install
+Configure o arquivo .env:
+Crie um arquivo .env na raiz do projeto seguindo o modelo do .env.example:
+
+Plaintext
+DATABASE_URL="sua_url_do_neon_db"
+GOOGLE_CLIENT_ID="seu_id_do_google"
+GOOGLE_CLIENT_SECRET="sua_secret_do_google"
+NEXTAUTH_SECRET="sua_secret_gerada"
+Gere o Prisma Client:
+
+Bash
+npx prisma generate
+Inicie o servidor de desenvolvimento:
+
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🌐 Deploy e Visualização
+O projeto está em produção e pode ser acessado através da Vercel no link abaixo:
+👉 (https://barber-app-rose.vercel.app/)
