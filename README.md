@@ -1,13 +1,6 @@
 💈 BarberApp - Sistema de Agendamento Online
 Este é um projeto de SaaS (Software as a Service) focado no gerenciamento de barbearias, desenvolvido como parte da graduação em Análise e Desenvolvimento de Sistemas na UNINASSAU. O sistema permite que clientes realizem agendamentos em tempo real e oferece uma interface administrativa para o proprietário gerenciar o faturamento e horários.
 
-👤 Autor
-Nome: Danilo Oliveira
-
-Curso: Análise e Desenvolvimento de Sistemas (4º Período)
-
-Instituição: UNINASSAU
-
 🚀 Tecnologias Utilizadas
 O projeto utiliza a stack mais moderna do ecossistema JavaScript:
 
